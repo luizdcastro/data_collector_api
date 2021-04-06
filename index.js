@@ -12,7 +12,8 @@ app.use(helmet());
 app.use(cors());
 
 //Import Routes
-const authRouter = require("./routes/authRoutes.js");
+const authRouter = require("./routes/authRoutes");
+const userRouter = require('./routes/userRoutes')
 
 //Connect to DB
 dotenv.config({ path: "./config.env" });
@@ -28,6 +29,7 @@ mongoose
 
 //Route Middlewares
 app.use("/v1/auth", authRouter);
+app.use("/v1/user", userRouter);
 
 //Server
 const port = 8000;
