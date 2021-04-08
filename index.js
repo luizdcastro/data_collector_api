@@ -14,6 +14,7 @@ app.use(cors());
 //Import Routes
 const authRouter = require("./routes/authRoutes");
 const userRouter = require('./routes/userRoutes')
+const webhookRouter = require('./routes/webhookRoutes')
 
 //Connect to DB
 dotenv.config({ path: "./config.env" });
@@ -30,6 +31,7 @@ mongoose
 //Route Middlewares
 app.use("/v1/auth", authRouter);
 app.use("/v1/user", userRouter);
+app.use("/v1/webhook", webhookRouter);
 
 //Server
 const port = 8000;
