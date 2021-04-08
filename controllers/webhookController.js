@@ -17,7 +17,7 @@ exports.signal = async (req, res, next) => {
 
 	const cripto_symbol = "BTC/USDT"
 	const take_profit = 200
-	const leverage = 5
+	const leverage = 8
 	const capital = 1.1
 
 	if (signal === "Long" || "Short") {
