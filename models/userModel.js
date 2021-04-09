@@ -13,16 +13,13 @@ const userSchema = new mongoose.Schema(
 			required: [true, "Por favor, informe seu telefone"],
 		},
 		leverage: {
-			type: String,
-			default: "8"
+			type: String,			
 		},
 		take_profit: {
-			type: Number,
-			default: 300
+			type: Number,		
 		},
 		crypto: {
-			type: String,
-			default: "BTCUSDT"
+			type: String,		
 		},
 		api_key: {
 			type: String
