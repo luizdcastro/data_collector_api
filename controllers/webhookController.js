@@ -19,11 +19,11 @@ exports.signal = async (req, res, next) => {
 	const leverage = 5
 	const capital = 1.1
 
-	if (signal === "Long" || "Short" || "Close Long" || "Close Short") {
+	if (signal === "Long" || "Short" || "Close Long" || "Close Short") {		
 
 		// order size
 		let bid_price = await exchange.fetchTicker(cripto_symbol)
-		let balance = await exchange.fetchBalance()
+		let balance = await exchange.fetchBalance()		
 		let order_size = ((balance.USDT.free / capital) / bid_price.bid * leverage).toFixed(3)
 
 		// verify open orders and sizes
@@ -46,11 +46,23 @@ exports.signal = async (req, res, next) => {
 		}
 
 		if (signal === "Long" & long_entry === "0" & short_entry !== "0") {
-		// Open long at market price
+		// Close current short order
+			await exchange.createMarketBuyOrder(cripto_symbol, Number(short_size), { 'reduce_only': true })
+		// Reset order size
+			let bid_price = await exchange.fetchTicker(cripto_symbol)
+			let balance = await exchange.fetchBalance()		
+			let order_size = ((balance.USDT.free / capital) / bid_price.bid * leverage).toFixed(3)
+		// Open long at market price		
 			exchange.createOrder(cripto_symbol, 'market', 'Buy', Number(order_size))
 		}
 
 		if (signal === "Short" & long_entry !== "0" & short_entry === "0") {
+		// Close current long order	
+			await exchange.createMarketSellOrder(cripto_symbol, Number(long_size), { 'reduce_only': true })
+		// Reset order size
+			let bid_price = await exchange.fetchTicker(cripto_symbol)
+			let balance = await exchange.fetchBalance()		
+			let order_size = ((balance.USDT.free / capital) / bid_price.bid * leverage).toFixed(3)
 		// Open short at market price 
 			exchange.createOrder(cripto_symbol, 'market', 'Sell', Number(order_size))
 		}
