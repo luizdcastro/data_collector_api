@@ -15,8 +15,8 @@ const exchange = new ccxt.bybit({
 exports.signal = async (req, res, next) => {
 	const { signal } = req.body;
 
-	const cripto_symbol = "BTC/USDT"
-	const leverage = 5
+	const cripto_symbol = "ETH/USDT"
+	const leverage = 3
 	const capital = 1.1
 
 	if (signal === "Long" || "Short" || "Close Long" || "Close Short") {		
@@ -28,8 +28,8 @@ exports.signal = async (req, res, next) => {
 
 		// verify open orders and sizes
 		let open_orders = await exchange.fetchPositions(cripto_symbol, { "type": "linear" })
-		let side_short = await open_orders.filter((item) => item.data.symbol === "BTCUSDT" && item.data.side === "Sell")
-		let side_long = await open_orders.filter((item) => item.data.symbol === "BTCUSDT" && item.data.side === "Buy")
+		let side_short = await open_orders.filter((item) => item.data.symbol === "ETHUSDT" && item.data.side === "Sell")
+		let side_long = await open_orders.filter((item) => item.data.symbol === "ETHUSDT" && item.data.side === "Buy")
 		let short_entry = side_short[0].data.entry_price
 		let long_entry = side_long[0].data.entry_price
 		let short_size = side_short[0].data.size
