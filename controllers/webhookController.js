@@ -19,7 +19,7 @@ exports.signal = async (req, res, next) => {
 	const leverage = 3
 	const capital = 1.1
 
-	if (signal === "Long" || "Short" || "Close Long" || "Close Short") {		
+	if (signal === "Long" || "Short") {		
 
 		// order size
 		let bid_price = await exchange.fetchTicker(cripto_symbol)
@@ -55,7 +55,6 @@ exports.signal = async (req, res, next) => {
 		// Open long at market price		
 			exchange.createOrder(cripto_symbol, 'market', 'Buy', Number(order_size))
 		}
-
 		if (signal === "Short" & long_entry !== "0" & short_entry === "0") {
 		// Close current long order	
 			await exchange.createMarketSellOrder(cripto_symbol, Number(long_size), { 'reduce_only': true })
@@ -65,17 +64,7 @@ exports.signal = async (req, res, next) => {
 			let order_size = ((balance.USDT.free / capital) / bid_price.bid * leverage).toFixed(3)
 		// Open short at market price 
 			exchange.createOrder(cripto_symbol, 'market', 'Sell', Number(order_size))
-		}
-
-		if (signal === "Close Short" & long_entry === "0" & short_entry !== "0") {
-		// Close short at market price		
-			exchange.createMarketBuyOrder(cripto_symbol, Number(short_size), { 'reduce_only': true })
-		}
-
-		if (signal === "Close Long" & long_entry !== "0" & short_entry === "0") {
-		// Close long at market price 
-			exchange.createMarketSellOrder(cripto_symbol, Number(long_size), { 'reduce_only': true })
-		}
+		}		
 	} else {
 		console.log('Sinal inválidos')
 	}
