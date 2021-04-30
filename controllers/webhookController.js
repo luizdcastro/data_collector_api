@@ -21,7 +21,9 @@ exports.price = async (req, res, next) => {
 	const stochasticD = price.stochasticD.toFixed(2)
 	const macd = price.macd.toFixed(2)
 	const macdSignal = price.macdSignal.toFixed(2)
-	const ema = price.ema
+	const ema150 = price.ema150
+	const ema100 = price.ema100
+	const ema50 = price.ema50
 	const adx = price.adx.toFixed(2)
 	const osc = price.osc.toFixed(2)
 
@@ -39,13 +41,12 @@ exports.price = async (req, res, next) => {
 			"stochasticD": stochasticD,
 			"macd": macd,
 			"macdSignal": macdSignal,
-			"ema": ema,
+			"ema150": ema150,
+			"ema100": ema100,
+			"ema50": ema50,
 			"adx": adx,
 			"osc": osc
-		},
-		{
-			new: true,
-		}
+		}	
 	)
 	
 	res.status(200).json({

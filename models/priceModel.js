@@ -38,7 +38,13 @@ const userSchema = new mongoose.Schema(
 		macdSignal: {
 			type: Number,
         },
-        ema: {
+        ema150: {
+			type: Number,
+		},
+		ema100: {
+			type: Number,
+		},
+		ema50: {
 			type: Number,
 		},
 		adx: {
