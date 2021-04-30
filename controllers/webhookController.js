@@ -7,7 +7,7 @@ exports.price = async (req, res, next) => {
 
 	axios({
 		method: 'post',
-		url: 'http://localhost:8000/v1/price',
+		url: 'https://mambit.herokuapp.com/v1/webhook/price',
 		data: {
 			"symbol": price.symbol,
 			"time": price.time,
