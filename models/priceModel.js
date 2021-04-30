@@ -55,19 +55,4 @@ const userSchema = new mongoose.Schema(
 	}
 );
 
-userSchema.pre("save", async function (next) {
-	this.open = this.open.toFixed(2);
-	this.close = this.close.toFixed(2);
-	this.high = this.high.toFixed(2);
-	this.low = this.low.toFixed(2);
-	this.volume = this.volume.toFixed(2);
-	this.rsi = this.rsi.toFixed(2);
-	this.stochasticK = this.stochasticK.toFixed(2);
-	this.stochasticD = this.stochasticD.toFixed(2);
-	this.macd = this.macd.toFixed(2);
-	this.macdSignal = this.macdSignal.toFixed(2);
-	this.adx = this.adx.toFixed(2);
-	this.osc = this.osc.toFixed(2);
-});
-
 module.exports = mongoose.model("Price", userSchema);

@@ -1,7 +1,57 @@
 const ccxt = require('ccxt');
 const dotenv = require("dotenv");
+const axios = require("axios")
+const Price = require('./../models/priceModel');
 
 dotenv.config({ path: "./config.env" });
+
+exports.price = async (req, res, next) => {
+
+	const price = await req.body;
+
+	const symbol = price.symbol
+	const time = price.time
+	const open = price.open
+	const close = price.close.toFixed(2)
+	const high = price.high.toFixed(2)
+	const low = price.low.toFixed(2)
+	const volume = price.volume.toFixed(2)
+	const rsi = price.rsi.toFixed(2)
+	const stochasticK = price.stochasticK.toFixed(2)
+	const stochasticD = price.stochasticD.toFixed(2)
+	const macd = price.macd.toFixed(2)
+	const macdSignal = price.macdSignal.toFixed(2)
+	const ema = price.ema
+	const adx = price.adx.toFixed(2)
+	const osc = price.osc.toFixed(2)
+
+	await Price.create(
+		{
+			"symbol": symbol,
+			"time": time,
+			"open": open,
+			"close": close,
+			"high": high,
+			"low": low,
+			"volume": volume,
+			"rsi": rsi,
+			"stochasticK": stochasticK,
+			"stochasticD": stochasticD,
+			"macd": macd,
+			"macdSignal": macdSignal,
+			"ema": ema,
+			"adx": adx,
+			"osc": osc
+		},
+		{
+			new: true,
+		}
+	)
+	
+	res.status(200).json({
+		status: "success",
+	});
+}
 
 const exchange = new ccxt.bybit({
 	apiKey: process.env.API_KEY,
