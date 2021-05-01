@@ -10,6 +10,7 @@ const helmet = require("helmet");
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
+app.enable('trust proxy')
 
 //Import Routes
 const priceRouter = require('./routes/priceRoutes');
@@ -31,6 +32,7 @@ mongoose
 app.use("/v1/price", priceRouter);
 app.use("/v1/webhook", webhookRouter);
 
+//Server
 //Server
 const port = 8000;
 app.listen(process.env.PORT || port, () =>

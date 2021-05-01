@@ -1,10 +1,15 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
-const userSchema = new mongoose.Schema(
-	{	
+const candle5Schema = new mongoose.Schema(
+	{			
 		symbol: {
 			type: String,
 		},	
+		candle_time: {
+			type: Number,
+			default: 5 
+		},
 		time: {
 			type: Date,
 		},
@@ -64,9 +69,7 @@ const userSchema = new mongoose.Schema(
         },	
 		atr: {
 			type: Number,
-        },	
-
-		
+        },		
 	},
 	{
 		toJSON: { virtuals: true },
@@ -74,4 +77,6 @@ const userSchema = new mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model("Price", userSchema);
+candle5Schema.plugin(AutoIncrement, {inc_field: 'id_sequence'});
+
+module.exports = mongoose.model("Candle_5", candle5Schema);

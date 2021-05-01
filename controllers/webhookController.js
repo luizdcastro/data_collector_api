@@ -1,5 +1,5 @@
 const dotenv = require("dotenv");
-const Price = require('./../models/priceModel');
+const Price = require('../models/candle5Model');
 dotenv.config({ path: "./config.env" });
 
 exports.price = async (req, res, next) => {
