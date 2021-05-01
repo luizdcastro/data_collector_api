@@ -12,12 +12,10 @@ app.use(helmet());
 app.use(cors());
 
 //Import Routes
-const authRouter = require("./routes/authRoutes");
-const userRouter = require('./routes/userRoutes');
 const priceRouter = require('./routes/priceRoutes');
 const webhookRouter = require('./routes/webhookRoutes');
 
-//Connect to DB
+//Connect to Mongo DB
 dotenv.config({ path: "./config.env" });
 
 mongoose
@@ -27,11 +25,9 @@ mongoose
 		useUnifiedTopology: true,
 		useFindAndModify: false,
 	})
-	.then(() => console.log("DB connection successful!"));
+	.then(() => console.log("MongoDB connection successful!"));
 
 //Route Middlewares
-app.use("/v1/auth", authRouter);
-app.use("/v1/user", userRouter);
 app.use("/v1/price", priceRouter);
 app.use("/v1/webhook", webhookRouter);
 

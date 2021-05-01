@@ -26,25 +26,31 @@ const userSchema = new mongoose.Schema(
 		rsi: {
 			type: Number,	
 		},
-		stochasticK: {
+		stochastic_k: {
 			type: Number,		
 		},
-		stochasticD: {
+		stochastic_d: {
 			type: Number,
 		},
 		macd: {
 			type: Number,
 		},
-		macdSignal: {
+		macd_signal: {
 			type: Number,
         },
-        ema150: {
+		ema_200: {
 			type: Number,
 		},
-		ema100: {
+        ema_150: {
+			type: Number,
+		},
+		ema_100: {
 			type: Number,
 		},
 		ema50: {
+			type: Number,
+		},
+		ema_20: {
 			type: Number,
 		},
 		adx: {
@@ -53,6 +59,13 @@ const userSchema = new mongoose.Schema(
 		osc: {
 			type: Number,
         },	
+		vwap: {
+			type: Number,
+        },	
+		atr: {
+			type: Number,
+        },	
+
 		
 	},
 	{
