@@ -13,7 +13,7 @@ app.use(cors());
 app.enable('trust proxy')
 
 //Import Routes
-const priceRouter = require('./routes/priceRoutes');
+const candleRouter = require('./routes/candleRoutes');
 const webhookRouter = require('./routes/webhookRoutes');
 
 //Connect to Mongo DB
@@ -29,8 +29,8 @@ mongoose
 	.then(() => console.log("MongoDB connection successful!"));
 
 //Route Middlewares
-app.use("/v1/price", priceRouter);
-app.use("/v1/webhook", webhookRouter);
+app.use("/candle", candleRouter);
+app.use("/webhook", webhookRouter);
 
 //Server
 //Server
